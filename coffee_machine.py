@@ -4,13 +4,13 @@ class CoffeeMachine:
         self.fillerup = [0, 0, 0, 0, 0]
         self.selection = ''
         self.choices = [[-250, 0, -16, -1, 4],  # espresso
-           [-350, -75, -20, -1, 7],  # latte
-           [-200, -100, -12, -1, 6]]  # cappuccino
-        self.updated = self.current
+                        [-350, -75, -20, -1, 7],  # latte
+                        [-200, -100, -12, -1, 6]]  # cappuccino
 
     def state(self):
         print('The coffee machine has:\n' + str(self.current[0]) + ' of water\n' + str(self.current[1]) + ' of milk\n'
-              + str(self.current[2]) + ' of coffee beans\n' + str(self.current[3]) + ' of disposable cups\n' + str(self.current[4])
+              + str(self.current[2]) + ' of coffee beans\n' + str(self.current[3]) + ' of disposable cups\n' + str(
+            self.current[4])
               + ' of money')
         print()
 
@@ -21,14 +21,14 @@ class CoffeeMachine:
 
     def fill(self):
         self.fillerup = [int(input('Write how many ml of water do you want to add:')),
-                int(input('Write how many ml of milk do you want to add:')),
-                int(input('Write how many grams of coffee beans do you want to add:')),
-                int(input('Write how many disposable cups of coffee do you want to add:')), 0]
+                         int(input('Write how many ml of milk do you want to add:')),
+                         int(input('Write how many grams of coffee beans do you want to add:')),
+                         int(input('Write how many disposable cups of coffee do you want to add:')), 0]
         self.current = [self.current[i] + self.fillerup[i] for i in range(len(self.current))]
         print()
 
     def updated(self):
-        self.current = [self.current[i] + self.choices[int(self.selection)][i] for i in range(0, 5)]
+        self.current = [self.current[i] + self.choices[int(self.selection) - 1][i] for i in range(0, 5)]
 
     def buy(self):
         self.selection = input('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:')
@@ -44,11 +44,11 @@ class CoffeeMachine:
             if unable < 1:
                 print('I have enough resources, making you a coffee!')
                 if self.selection == "1":
-                    self.current = self.updated
+                    self.updated()
                 elif self.selection == "2":
-                    self.current = self.updated
+                    self.updated()
                 elif self.selection == "3":
-                    self.current = self.updated
+                    self.updated()
             else:
                 print('Sorry, not enough resources!')
             print()
@@ -69,7 +69,3 @@ while True:
         coffee_machine.state()
     else:
         break
-
-
-
-
